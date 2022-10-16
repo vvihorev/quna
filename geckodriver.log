@@ -1,0 +1,25 @@
+1665942753691	geckodriver	INFO	Listening on 127.0.0.1:35995
+1665942754193	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "45427" "-no-remote" "-profile" "/tmp/rust_mozprofileg6GPAV"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1665942754990	Marionette	INFO	Marionette enabled
+1665942754995	Marionette	INFO	Listening on port 32903
+WebDriver BiDi listening on ws://127.0.0.1:45427
+1665942755122	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileg6GPAV/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://127.0.0.1:45427/devtools/browser/24030785-d269-4fe0-9970-b3b9a52b51c0
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror

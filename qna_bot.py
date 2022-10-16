@@ -25,7 +25,8 @@ def log_in_mshp() -> None:
     driver.get("https://my.mshp.ru/accounts/login/#/")
     login_button = driver.find_element(By.LINK_TEXT, "Вход для сотрудников")
     login_button.click()
-    driver.find_element(By.ID, "username").send_keys(os.environ["USERNAME"]) driver.find_element(By.ID, "password").send_keys(os.environ["PASSWORD"])
+    driver.find_element(By.ID, "username").send_keys(os.environ["USERNAME"])
+    driver.find_element(By.ID, "password").send_keys(os.environ["PASSWORD"])
     driver.find_element(By.XPATH, "//*[contains(text(), 'Войти')]").click()
     driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
 
@@ -66,7 +67,7 @@ def send_answer() -> None:
     """Find and press the 'send answer' button."""
     driver.find_element(By.XPATH, "//*[contains(text(), 'Отправить')]").click()
 
-
+input()
 # JUST IGNORE THIS CODE
 # class MyApp(App):
 #     """An example of a very simple Textual App"""
