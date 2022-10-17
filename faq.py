@@ -28,7 +28,7 @@ class FAQManager:
         """
         self.faq.update(new_faq)
         with open(self.faq_file, "w") as file:
-            json.dump(self.faq, file)
+            json.dump(self.faq, file, ensure_ascii=False)
 
     def _word_match(self, w1: str, w2: str):
         """Returns probability of two words being the same."""

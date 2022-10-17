@@ -2,8 +2,6 @@
 
 This is a TUI helper for chat support workers.
 
-# Planned
-
 ## Quna main features
 
 - hotkeys for responses, problem inspection, etc.
@@ -21,7 +19,7 @@ This is a TUI helper for chat support workers.
 - display message in a separate program window, so the chat does not have to be scrolled
 - sound notification about new messages if no messages have appeared in the last 2 seconds
 
-# Brief module description
+## Brief module description
 
 - tui - Custom terminal UI
   - getch - Get a single character from stdin, used in tui
