@@ -141,7 +141,7 @@ class WebPlug:
             print("Quitting from edit mode")
             self.last_status = "Quitting from edit mode"
             return
-        answer = self.greeting + self.relevant_responses[self.cur_response] + input_answer
+        answer = self.greeting + self.relevant_responses[self.cur_response][1] + input_answer
         self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
 
     def custom_answer(self) -> None:
