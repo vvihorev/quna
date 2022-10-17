@@ -1,4 +1,5 @@
 import os
+import re
 import time
 
 from selenium import webdriver
@@ -7,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 import dotenv
+import pyperclip
 
 from faq import FAQManager
 
@@ -20,6 +22,7 @@ class WebPlug:
         self.questions = []
 
         self.student_name = ""
+        self.student_full_name = ""
         self.greeting = ""
         self.question_text = "No question found/opened"
 
@@ -42,8 +45,10 @@ class WebPlug:
 
     def get_question_info(self):
         self.student_name = self.questions[self.cur_question].text.split()[-1]
+        self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
+        pyperclip.copy(self.student_full_name)
         self.greeting = f"Добрый день, {self.student_name} :)\n"
-        self.question_text = self.get_last_message_text()
+        self.question_text = self.get_messages_text()
         self.relevant_responses = self.faq.get_responses(self.question_text)
 
     def log_in_mshp(self) -> None:
@@ -109,7 +114,7 @@ class WebPlug:
             print("No more responses found")
             self.last_status = "No more responses found"
 
-    def get_last_message_text(self) -> str:
+    def get_messages_text(self) -> str:
         """Get text of the last message in the current question."""
         self.wait_for_element(
             By.XPATH, "//div[contains(@class, 'comment_message__text')]"
@@ -117,12 +122,10 @@ class WebPlug:
         messages = self.driver.find_elements(
             By.XPATH, "//div[contains(@class, 'comment_message__text')]"
         )
-        last_message_text = "Message was not found"
+        messages_text = "Message was not found"
         if len(messages) > 0:
-            last_message_text = messages[-1].text
-        elif len(messages) > 1:
-            last_message_text = messages[-2].text + "\n" + last_message_text
-        return last_message_text
+            messages_text = '\n'.join([m.text for m in messages])
+        return messages_text
 
     def input_answer(self) -> None:
         """Inputs the given answer into the textarea."""
@@ -138,7 +141,7 @@ class WebPlug:
             print("Quitting from edit mode")
             self.last_status = "Quitting from edit mode"
             return
-        answer = self.greeting + input_answer
+        answer = self.greeting + self.relevant_responses[self.cur_response] + input_answer
         self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
 
     def custom_answer(self) -> None:

@@ -11,11 +11,14 @@ class TUI:
         os.system("clear")
         greeting_status = "OFF" if self.web_plug.greeting == "" else "ON"
         print("The question is:")
+        print("-------------------")
         print(self.web_plug.question_text)
         print("-------------------")
         print(f"Waiting for your action... [Greeting: {greeting_status}] [d/u/i]")
         print("Proposed answer:")
+        print("-------------------")
         print(self.web_plug.relevant_responses[self.web_plug.cur_response])
+        print("-------------------")
         print("Last status: ", self.web_plug.last_status)
 
     def parse_input(self):
