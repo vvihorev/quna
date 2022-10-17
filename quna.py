@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from tui import TUI
 from web_plug import WebPlug
+from faq import FAQManager
 
 
 def main():
