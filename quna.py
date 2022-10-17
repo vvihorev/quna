@@ -12,7 +12,7 @@ from textual.widgets import Header, Footer, ScrollView
 
 
 dotenv.load_dotenv()
-# driver = webdriver.Firefox()
+driver = webdriver.Firefox()
 
 # TODO: add "Добрый день, {student_name} :)" to all messages
 # TODO: automate opening of students solution to the problem in question

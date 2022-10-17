@@ -1,0 +1,32 @@
+---
+driver=<class 'textual.drivers.linux_driver.LinuxDriver'>
+Load() >>> Quna(title='Textual')
+Mount() >>> Quna(title='Quna')
+Mount() >>> DockView(name='DockView#1')
+Mount() >>> Header('')
+Mount() >>> ScrollView(name='ScrollView#1')
+Mount() >>> ScrollView(name='ScrollView#1')
+Mount() >>> WindowView(name='WindowView#1')
+TRANSLATING layout
+WindowChange(WindowView(name='WindowView#1')) >>> ScrollView(name='ScrollView#1')
+WindowChange(WindowView(name='WindowView#1')) >>> ScrollView(name='ScrollView#1')
+view.forwarded Key(key='O')
+Key(key='O') >>> Quna(title='Quna')
+ACTION Quna(title='Quna') log_in_mshp
+view.forwarded Key(key='r')
+Key(key='r') >>> Quna(title='Quna')
+view.forwarded Key(key='r')
+Key(key='r') >>> Quna(title='Quna')
+set_focus Footer(keys=[])
+MouseDown(x=3, y=0, screen_y=9, button=1) >>> Footer(keys=[])
+MouseUp(x=3, y=0, screen_y=9, button=1) >>> Footer(keys=[])
+Click(x=3, y=0, screen_y=9, button=1) >>> Footer(keys=[])
+ACTION Quna(title='Quna') press
+ACTION Quna(title='Quna') refresh_questions
+Leave() >>> Footer(keys=[])
+Key(key='q') >>> Quna(title='Quna')
+ACTION Quna(title='Quna') quit
+CLOSED Quna(title='Quna')
+PROCESS END
+CLOSED ScrollView(name='ScrollView#1')
+CLOSED Header('Quna')

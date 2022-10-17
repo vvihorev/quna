@@ -1,0 +1,97 @@
+1665993138919	geckodriver	INFO	Listening on 127.0.0.1:51417
+1665993139419	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "58499" "-no-remote" "-profile" "/tmp/rust_mozprofileySGcHT"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1665993140398	Marionette	INFO	Marionette enabled
+1665993140402	Marionette	INFO	Listening on port 42449
+WebDriver BiDi listening on ws://127.0.0.1:58499
+1665993140557	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileySGcHT/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://127.0.0.1:58499/devtools/browser/f8aadc94-df1a-4d9a-a48c-6d20ea9d52e1
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 307: NS_ERROR_FAILURE: Should pass a non-null uri
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2009\"  data: no]"
+1665993213043	Marionette	INFO	Stopped listening on port 42449
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1665993327159	geckodriver	INFO	Listening on 127.0.0.1:49213
+1665993327166	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "50385" "-no-remote" "-profile" "/tmp/rust_mozprofileLgpqND"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1665993327797	Marionette	INFO	Marionette enabled
+1665993327801	Marionette	INFO	Listening on port 34861
+WebDriver BiDi listening on ws://127.0.0.1:50385
+1665993327919	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileLgpqND/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://127.0.0.1:50385/devtools/browser/40bb399e-fa96-4340-bb0e-0064fd56b748
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+1665993394878	geckodriver	INFO	Listening on 127.0.0.1:54997
+1665993395385	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "57081" "-no-remote" "-profile" "/tmp/rust_mozprofileDDUSR4"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1665993396361	Marionette	INFO	Marionette enabled
+1665993396366	Marionette	INFO	Listening on port 35055
+WebDriver BiDi listening on ws://127.0.0.1:57081
+1665993396536	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileDDUSR4/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://127.0.0.1:57081/devtools/browser/b4f24358-d1ce-4bbf-9979-74f80a4187ca
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2009\"  data: no]"
+1665993406152	Marionette	INFO	Stopped listening on port 34861
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2009\"  data: no]"
+1665993435557	Marionette	INFO	Stopped listening on port 35055
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1665993445074	geckodriver	INFO	Listening on 127.0.0.1:60069
+1665993445081	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "48133" "-no-remote" "-profile" "/tmp/rust_mozprofilehuRK4K"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1665993445714	Marionette	INFO	Marionette enabled
+1665993445718	Marionette	INFO	Listening on port 37929
+WebDriver BiDi listening on ws://127.0.0.1:48133
+1665993445837	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilehuRK4K/search.json.mozlz4", (void 0)))
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+DevTools listening on ws://127.0.0.1:48133/devtools/browser/ce2c7e93-29ff-4897-8482-1aeb7d728ead
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 307: NS_ERROR_FAILURE: Should pass a non-null uri
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://my.mshp.ru."
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://my.mshp.ru/static/requirejs/require.min.1565af44b896.js, line 5: Error: Script error for "main"
+https://requirejs.org/docs/errors.html#scripterror
+Missing chrome or resource URL: resource://gre/modules/UpdateListener.sys.mjs
+console.error: "Error during quit-application-granted: [Exception... \"File error: Not found\"  nsresult: \"0x80520012 (NS_ERROR_FILE_NOT_FOUND)\"  location: \"JS frame :: resource:///modules/BrowserGlue.jsm :: _onQuitApplicationGranted/tasks< :: line 2009\"  data: no]"
+1665993575762	Marionette	INFO	Stopped listening on port 37929
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
