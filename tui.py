@@ -47,9 +47,9 @@ class TUI:
                 case "i":
                     self.web_plug.input_answer()
                 case "s":
-                    self.web_plug.send()
+                    self.web_plug.send_answer()
                 case "S":
-                    self.web_plug.send_and_close()
+                    self.web_plug.send_and_close_answer()
                 case "q":
                     quit()
                 case "l":
@@ -75,9 +75,9 @@ class TUI:
                 case "ш":
                     self.web_plug.input_answer()
                 case "ы":
-                    self.web_plug.send()
+                    self.web_plug.send_answer()
                 case "Ы":
-                    self.web_plug.send_and_close()
+                    self.web_plug.send_and_close_answer()
                 case "й":
                     quit()
                 case "д":
