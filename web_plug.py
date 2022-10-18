@@ -33,6 +33,7 @@ class WebPlug:
         self.last_status = "Hello!"
 
     def wait_for_element(self, by, query):
+        """Waits until the page element is loaded, unless timeout happens"""
         timeout = 7
         try:
             element_present = expected_conditions.presence_of_element_located(
@@ -44,11 +45,19 @@ class WebPlug:
             self.last_status = "Timed out waiting for page to load"
 
     def get_question_info(self):
-        self.student_name = self.questions[self.cur_question].text.split()[-1]
-        self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
+        if len(self.questions) == 0:
+            self.student_name = ""
+            self.student_full_name = ""
+            self.question_text = "No questions found"
+        else:
+            try: 
+                self.student_name = self.questions[self.cur_question].text.split()[-1]
+            except:
+                self.last_status = "Имя студента не нашлось :("
+            self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
+            self.question_text = self.get_messages_text()
         pyperclip.copy(self.student_full_name)
         self.greeting = f"Добрый день, {self.student_name} :)\n"
-        self.question_text = self.get_messages_text()
         self.relevant_responses = self.faq.get_responses(self.question_text)
         self.cur_response = 0
 
@@ -88,6 +97,7 @@ class WebPlug:
             print("No questions found, refreshing")
             self.last_status = "No questions found, refreshing"
             self.refresh_questions()
+            return
         print(f"Going to the {which} question")
         self.last_status = f"Going to the {which} question"
         if prev and self.cur_question >= 1:
@@ -97,7 +107,11 @@ class WebPlug:
         else:
             print("No more questions found")
             return
-        self.questions[self.cur_question].click()
+        try:
+            self.questions[self.cur_question].click()
+        except:
+            self.refresh_questions()
+            return
         self.get_question_info()
 
     def next_response(self, prev=False) -> None:
@@ -174,6 +188,10 @@ class WebPlug:
         print("Sending the answer...")
         self.last_status = "Sending the answer..."
         self.driver.find_element(By.XPATH, "//*[contains(text(), 'Отправить')]").click()
+
+    def close_answer(self) -> None:
+        """Closes the current discussion"""
+        self.driver.find_element(By.XPATH, "//*[contains(text(), 'Закрыть вопрос')]").click()
 
     def toggle_greeting(self) -> None:
         if self.greeting == "":
