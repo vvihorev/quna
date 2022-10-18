@@ -86,7 +86,6 @@ class WebPlug:
         self.last_status = "Refreshing questions"
         self.driver.refresh()
         self.wait_for_element(By.CLASS_NAME, "discus-row")
-        time.sleep(2)
         self.questions = self.driver.find_elements(By.CLASS_NAME, "discus-row")
         print(f"Found {len(self.questions)} questions")
         self.last_status = f"Found {len(self.questions)} questions"
