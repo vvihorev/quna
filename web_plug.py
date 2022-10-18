@@ -74,8 +74,12 @@ class WebPlug:
 
         self.wait_for_element(By.XPATH, "//*[contains(text(), 'Вопросы')]")
         self.driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
-        self.wait_for_element(By.CLASS_NAME, "discus-row")
-        self.driver.find_element(By.CLASS_NAME, "discus-row").click()
+        try: 
+            self.wait_for_element(By.CLASS_NAME, "discus-row")
+            self.driver.find_element(By.CLASS_NAME, "discus-row").click()
+        except:
+            self.last_status = "No questions found, refresh later"
+            return
         self.refresh_questions()
 
     def refresh_questions(self) -> None:
@@ -100,8 +104,11 @@ class WebPlug:
             return
         print(f"Going to the {which} question")
         self.last_status = f"Going to the {which} question"
-        if prev and self.cur_question >= 1:
-            self.cur_question -= 1
+        if prev:
+            if self.cur_question >= 1:
+                self.cur_question -= 1
+            print("No more questions found")
+            return
         elif self.cur_question < len(self.questions) - 1:
             self.cur_question += 1
         else:
@@ -122,8 +129,12 @@ class WebPlug:
         which = "prev" if prev else "next"
         print(f"Going to the {which} response")
         self.last_status = f"Going to the {which} response"
-        if prev and self.cur_response >= 1:
-            self.cur_response -= 1
+        if prev:
+            if self.cur_response >= 1:
+                self.cur_response -= 1
+            else:
+                print("No more responses found")
+                self.last_status = "No more responses found"
         elif self.cur_response < len(self.relevant_responses) - 1:
             self.cur_response += 1
         else:

@@ -26,3 +26,7 @@ This is a TUI helper for chat support workers.
 - faq - Manage faq.json and provide response recommendations
 - web_plug - Connect to the browser
 - quna - Entry point
+
+## TODO:
+
+- make interface asynchronous
