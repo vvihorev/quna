@@ -26,7 +26,7 @@ class TUI:
         while True:
             try:
                 print("Sleeping, waiting for questions")
-                time.sleep(300)
+                time.sleep(120)
             except KeyboardInterrupt:
                 break
             print("Refreshing questions")
@@ -56,6 +56,8 @@ class TUI:
                     self.web_plug.next_response()
                 case "p":
                     self.web_plug.next_response(prev=True)
+                case "P":
+                    self.web_plug.pick_response()
                 case "c":
                     self.web_plug.custom_answer()
                 case "i":
@@ -88,6 +90,8 @@ class TUI:
                     self.web_plug.next_response()
                 case "з":
                     self.web_plug.next_response(prev=True)
+                case "З":
+                    self.web_plug.pick_response()
                 case "с":
                     self.web_plug.custom_answer()
                 case "я":

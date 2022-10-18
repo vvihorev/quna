@@ -139,6 +139,19 @@ class WebPlug:
             print("No more responses found")
             self.last_status = "No more responses found"
 
+    def pick_response(self):
+        os.system("clear")
+        print("Pick one of the available responses: ('' to cancel)")
+        for i, r in enumerate(self.relevant_responses):
+            print(f"{i}: {r[0]}, {r[1]}")
+        x = input("Response number: ")
+        if x == '':
+            return
+        else:
+            x = int(x)
+        if 0 <= x < len(self.relevant_responses):
+            self.cur_response = int(x)
+
     def get_messages_text(self) -> str:
         """Get text of the last message in the current question."""
         self.wait_for_element(
