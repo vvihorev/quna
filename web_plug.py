@@ -50,6 +50,7 @@ class WebPlug:
         self.greeting = f"Добрый день, {self.student_name} :)\n"
         self.question_text = self.get_messages_text()
         self.relevant_responses = self.faq.get_responses(self.question_text)
+        self.cur_response = 0
 
     def log_in_mshp(self) -> None:
         """Log in to the mshp.ru website and open the questions tab."""
@@ -77,6 +78,7 @@ class WebPlug:
         self.questions = self.driver.find_elements(By.CLASS_NAME, "discus-row")
         print(f"Found {len(self.questions)} questions")
         self.last_status = f"Found {len(self.questions)} questions"
+        self.cur_question = 0
         self.get_question_info()
 
     def next_question(self, prev=False) -> None:
@@ -141,7 +143,7 @@ class WebPlug:
             print("Quitting from edit mode")
             self.last_status = "Quitting from edit mode"
             return
-        answer = self.greeting + self.relevant_responses[self.cur_response] + input_answer
+        answer = self.greeting + self.relevant_responses[self.cur_response][1] + input_answer
         self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
 
     def custom_answer(self) -> None:
@@ -156,7 +158,8 @@ class WebPlug:
         if input_keywords != "":
             keywords = input_keywords.split()
             self.faq.update_faq({answer: keywords})
-        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
+        response = self.greeting + answer
+        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(response)
 
     def send_and_close_answer(self) -> None:
         """Find and press the 'send and close answer' button."""
