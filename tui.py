@@ -1,4 +1,5 @@
 import os
+import time
 
 from getch import getch
 
@@ -20,6 +21,19 @@ class TUI:
         print(self.web_plug.relevant_responses[self.web_plug.cur_response])
         print("-------------------")
         print("Last status: ", self.web_plug.last_status)
+
+    def pend_questions(self):
+        while True:
+            try:
+                print("Sleeping, waiting for questions")
+                time.sleep(300)
+            except KeyboardInterrupt:
+                break
+            print("Refreshing questions")
+            self.web_plug.refresh_questions()
+            if len(self.web_plug.questions) > 0:
+                print('\a')
+                return
 
     def parse_input(self):
         while True:
@@ -54,6 +68,8 @@ class TUI:
                     self.web_plug.send_and_close_answer()
                 case "q":
                     quit()
+                case "w":
+                    self.pend_questions()
                 case "l":
                     os.system("clear")
                 case "К":
@@ -84,6 +100,8 @@ class TUI:
                     self.web_plug.send_and_close_answer()
                 case "й":
                     quit()
+                case "ц":
+                    self.pend_questions()
                 case "д":
                     os.system("clear")
                 case _:

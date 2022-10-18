@@ -29,4 +29,8 @@ This is a TUI helper for chat support workers.
 
 ## TODO:
 
+- add functionality to send bot into waiting mode, refresh page every 5 minutes, ring bell if questions found
+
 - make interface asynchronous
+- add better response matching algorithm
+- add functionality to pick response from a list

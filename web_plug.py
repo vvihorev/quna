@@ -52,9 +52,9 @@ class WebPlug:
         else:
             try: 
                 self.student_name = self.questions[self.cur_question].text.split()[-1]
+                self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
             except:
                 self.last_status = "Имя студента не нашлось :("
-            self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
             self.question_text = self.get_messages_text()
         pyperclip.copy(self.student_full_name)
         self.greeting = f"Добрый день, {self.student_name} :)\n"
@@ -80,7 +80,6 @@ class WebPlug:
         except:
             self.last_status = "No questions found, refresh later"
             return
-        self.refresh_questions()
 
     def refresh_questions(self) -> None:
         print("Refreshing questions")
