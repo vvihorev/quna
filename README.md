@@ -22,7 +22,8 @@ This is a TUI helper for chat support workers.
 ## TODO:
 
 - make interface asynchronous
-- add better response matching algorithm
+- add better response matching algorithm (use assignment name and all response text to match)
+- ability to connect to a running browser session
 
 ### ChatModerator bot
 
