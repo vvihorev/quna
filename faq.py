@@ -30,6 +30,18 @@ class FAQManager:
         with open(self.faq_file, "w") as file:
             json.dump(self.faq, file, ensure_ascii=False)
 
+    def get_responses(self, question):
+        """Returns a list of possible responses in order of decreasing likeliness of match."""
+        question_tokens = self._get_question_tokens(question)
+        matches = []
+        for pair in self.faq.items():
+            # TODO: reply tokens can be cached, not calculated each time
+            reply_tokens = self._get_question_tokens(" ".join(pair[1]))
+            match = self._token_match(question_tokens, reply_tokens)
+            matches.append((match, pair[0]))
+        matches.sort(key=(lambda x: x[0]))
+        return matches[::-1]
+
     def _word_match(self, w1: str, w2: str):
         """Returns probability of two words being the same."""
         return round(
@@ -50,14 +62,3 @@ class FAQManager:
         tokens = [word for word in question.split() if len(word) > 4]
         return set([re.sub(r"[аеиоуюяэьый]", "", token) for token in tokens])
 
-    def get_responses(self, question):
-        """Returns a list of possible responses in order of decreasing likeliness of match."""
-        question_tokens = self._get_question_tokens(question)
-        matches = []
-        for pair in self.faq.items():
-            # TODO: reply tokens can be cached, not calculated each time
-            reply_tokens = self._get_question_tokens(" ".join(pair[1]))
-            match = self._token_match(question_tokens, reply_tokens)
-            matches.append((match, pair[0]))
-        matches.sort(key=(lambda x: x[0]))
-        return matches[::-1]

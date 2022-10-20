@@ -160,9 +160,10 @@ class WebPlug:
         messages = self.driver.find_elements(
             By.XPATH, "//div[contains(@class, 'comment_message__text')]"
         )
+        question_header = self.driver.find_element(By.CLASS_NAME, "h4").text
         messages_text = "Message was not found"
         if len(messages) > 0:
-            messages_text = '\n'.join([m.text for m in messages])
+            messages_text = question_header + '\n' + '\n'.join([m.text for m in messages])
         return messages_text
 
     def input_answer(self) -> None:
@@ -193,6 +194,7 @@ class WebPlug:
         input_keywords = input()
         if input_keywords != "":
             keywords = input_keywords.split()
+            keywords += self.question_text.split()
             self.faq.update_faq({answer: keywords})
         response = self.greeting + answer
         self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(response)
