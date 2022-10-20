@@ -65,7 +65,12 @@ class WebPlug:
         """Log in to the mshp.ru website and open the questions tab."""
         print("Logging into the mshp page")
         self.last_status = "Logging into the mshp page"
-        self.driver.get("https://my.mshp.ru/accounts/login/#/")
+        try:
+            self.driver.get("https://my.mshp.ru/accounts/login/#/")
+        except:
+            print("No internet connection, sorry :(")
+            input()
+            exit()
         login_button = self.driver.find_element(By.LINK_TEXT, "Вход для сотрудников")
         login_button.click()
         self.driver.find_element(By.ID, "username").send_keys(os.environ["USERNAME"])

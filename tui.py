@@ -11,12 +11,12 @@ class TUI:
     def main_page(self):
         os.system("clear")
         greeting_status = "OFF" if self.web_plug.greeting == "" else "ON"
-        print("The question is:")
+        print(f"The question is:")
         print("-------------------")
         print(self.web_plug.question_text)
         print("-------------------")
         print(f"Waiting for your action... [Greeting: {greeting_status}] [d/u/i]")
-        print("Proposed answer:")
+        print(f"Proposed answer: to {self.web_plug.student_name}")
         print("-------------------")
         print(self.web_plug.relevant_responses[self.web_plug.cur_response])
         print("-------------------")
