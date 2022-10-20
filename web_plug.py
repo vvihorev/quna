@@ -85,6 +85,7 @@ class WebPlug:
         except:
             self.last_status = "No questions found, refresh later"
             return
+        self.refresh_questions()
 
     def refresh_questions(self) -> None:
         print("Refreshing questions")
@@ -95,7 +96,9 @@ class WebPlug:
         print(f"Found {len(self.questions)} questions")
         self.last_status = f"Found {len(self.questions)} questions"
         self.cur_question = 0
-        self.get_question_info()
+        if len(self.questions) > 0:
+            self.questions[self.cur_question].click()
+            self.get_question_info()
 
     def next_question(self, prev=False) -> None:
         """Click on the next question in list."""
@@ -110,8 +113,9 @@ class WebPlug:
         if prev:
             if self.cur_question >= 1:
                 self.cur_question -= 1
-            print("No more questions found")
-            return
+            else:
+                print("No more questions found")
+                return
         elif self.cur_question < len(self.questions) - 1:
             self.cur_question += 1
         else:
