@@ -32,7 +32,7 @@ class TUI:
             print("Refreshing questions")
             self.web_plug.refresh_questions()
             if len(self.web_plug.questions) > 0:
-                print('\a')
+                print("\a")
                 return
 
     def parse_input(self):

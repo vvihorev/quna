@@ -61,4 +61,3 @@ class FAQManager:
         question = re.sub(r"[^ \w]|\d  ", " ", question)
         tokens = [word for word in question.split() if len(word) > 4]
         return set([re.sub(r"[аеиоуюяэьый]", "", token) for token in tokens])
-

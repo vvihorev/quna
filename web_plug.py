@@ -4,7 +4,7 @@ import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 import dotenv
@@ -16,7 +16,7 @@ from faq import FAQManager
 class WebPlug:
     def __init__(self) -> None:
         dotenv.load_dotenv()
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
 
         self.cur_question = 0
         self.questions = []
@@ -50,9 +50,11 @@ class WebPlug:
             self.student_full_name = ""
             self.question_text = "No questions found"
         else:
-            try: 
+            try:
                 self.student_name = self.questions[self.cur_question].text.split()[-1]
-                self.student_full_name = re.sub(r'\d', '', self.questions[self.cur_question].text)
+                self.student_full_name = re.sub(
+                    r"\d", "", self.questions[self.cur_question].text
+                )
             except:
                 self.last_status = "Имя студента не нашлось :("
             self.question_text = self.get_messages_text()
@@ -79,7 +81,7 @@ class WebPlug:
 
         self.wait_for_element(By.XPATH, "//*[contains(text(), 'Вопросы')]")
         self.driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
-        try: 
+        try:
             self.wait_for_element(By.CLASS_NAME, "discus-row")
             self.driver.find_element(By.CLASS_NAME, "discus-row").click()
         except:
@@ -154,7 +156,7 @@ class WebPlug:
         for i, r in enumerate(self.relevant_responses):
             print(f"{i}: {r[0]}, {r[1]}")
         x = input("Response number: ")
-        if x == '':
+        if x == "":
             return
         else:
             x = int(x)
@@ -172,7 +174,9 @@ class WebPlug:
         question_header = self.driver.find_element(By.CLASS_NAME, "h4").text
         messages_text = "Message was not found"
         if len(messages) > 0:
-            messages_text = question_header + '\n' + '\n'.join([m.text for m in messages])
+            messages_text = (
+                question_header + "\n" + "\n".join([m.text for m in messages])
+            )
         return messages_text
 
     def input_answer(self) -> None:
@@ -189,7 +193,9 @@ class WebPlug:
             print("Quitting from edit mode")
             self.last_status = "Quitting from edit mode"
             return
-        answer = self.greeting + self.relevant_responses[self.cur_response][1] + input_answer
+        answer = (
+            self.greeting + self.relevant_responses[self.cur_response][1] + input_answer
+        )
         self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
 
     def custom_answer(self) -> None:
@@ -206,7 +212,9 @@ class WebPlug:
             keywords += self.question_text.split()
             self.faq.update_faq({answer: keywords})
         response = self.greeting + answer
-        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(response)
+        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(
+            response
+        )
 
     def send_and_close_answer(self) -> None:
         """Find and press the 'send and close answer' button."""
@@ -224,7 +232,9 @@ class WebPlug:
 
     def close_answer(self) -> None:
         """Closes the current discussion"""
-        self.driver.find_element(By.XPATH, "//*[contains(text(), 'Закрыть вопрос')]").click()
+        self.driver.find_element(
+            By.XPATH, "//*[contains(text(), 'Закрыть вопрос')]"
+        ).click()
 
     def toggle_greeting(self) -> None:
         if self.greeting == "":
