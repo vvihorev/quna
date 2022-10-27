@@ -1,14 +1,14 @@
 #!/usr/bin/python
-from tui import TUI
 from web_plug import WebPlug
+from tkinter_ui import TkinterUI
 from faq import FAQManager
 
 
 def main():
     web_plug = WebPlug()
-    tui = TUI(web_plug)
+    ui = TkinterUI(web_plug)
     web_plug.log_in_mshp()
-    tui.parse_input()
+    ui.run()
 
 
 if __name__ == "__main__":

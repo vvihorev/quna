@@ -41,7 +41,6 @@ class WebPlug:
             )
             WebDriverWait(self.driver, timeout).until(element_present)
         except TimeoutException:
-            print("Timed out waiting for page to load")
             self.last_status = "Timed out waiting for page to load"
 
     def get_question_info(self):
@@ -79,23 +78,20 @@ class WebPlug:
         self.driver.find_element(By.ID, "password").send_keys(os.environ["PASSWORD"])
         self.driver.find_element(By.XPATH, "//*[contains(text(), 'Войти')]").click()
 
-        self.wait_for_element(By.XPATH, "//*[contains(text(), 'Вопросы')]")
-        self.driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
-        try:
-            self.wait_for_element(By.CLASS_NAME, "discus-row")
-            self.driver.find_element(By.CLASS_NAME, "discus-row").click()
-        except:
-            self.last_status = "No questions found, refresh later"
-            return
-        self.refresh_questions()
+        # self.wait_for_element(By.XPATH, "//*[contains(text(), 'Вопросы')]")
+        # self.driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
+        # try:
+            # self.wait_for_element(By.CLASS_NAME, "discus-row")
+            # self.driver.find_element(By.CLASS_NAME, "discus-row").click()
+        # except:
+            # self.last_status = "No questions found, refresh later"
+            # return
+        # self.refresh_questions()
 
     def refresh_questions(self) -> None:
-        print("Refreshing questions")
-        self.last_status = "Refreshing questions"
         self.driver.refresh()
         self.wait_for_element(By.CLASS_NAME, "discus-row")
         self.questions = self.driver.find_elements(By.CLASS_NAME, "discus-row")
-        print(f"Found {len(self.questions)} questions")
         self.last_status = f"Found {len(self.questions)} questions"
         self.cur_question = 0
         if len(self.questions) > 0:
@@ -106,22 +102,18 @@ class WebPlug:
         """Click on the next question in list."""
         which = "prev" if prev else "next"
         if self.questions == []:
-            print("No questions found, refreshing")
             self.last_status = "No questions found, refreshing"
             self.refresh_questions()
             return
-        print(f"Going to the {which} question")
         self.last_status = f"Going to the {which} question"
         if prev:
             if self.cur_question >= 1:
                 self.cur_question -= 1
             else:
-                print("No more questions found")
                 return
         elif self.cur_question < len(self.questions) - 1:
             self.cur_question += 1
         else:
-            print("No more questions found")
             return
         try:
             self.questions[self.cur_question].click()
@@ -132,22 +124,18 @@ class WebPlug:
 
     def next_response(self, prev=False) -> None:
         if len(self.relevant_responses) <= 1:
-            print("No relevant responses found")
             self.last_status = "No relevant responses found"
             return
         which = "prev" if prev else "next"
-        print(f"Going to the {which} response")
         self.last_status = f"Going to the {which} response"
         if prev:
             if self.cur_response >= 1:
                 self.cur_response -= 1
             else:
-                print("No more responses found")
                 self.last_status = "No more responses found"
         elif self.cur_response < len(self.relevant_responses) - 1:
             self.cur_response += 1
         else:
-            print("No more responses found")
             self.last_status = "No more responses found"
 
     def pick_response(self):
@@ -218,7 +206,6 @@ class WebPlug:
 
     def send_and_close_answer(self) -> None:
         """Find and press the 'send and close answer' button."""
-        print("Sending the answer and closing the discussion")
         self.last_status = "Sending the answer and closing the discussion"
         self.driver.find_element(
             By.XPATH, "//*[contains(text(), 'Отправить и закрыть')]"
@@ -226,7 +213,6 @@ class WebPlug:
 
     def send_answer(self) -> None:
         """Find and press the 'send answer' button."""
-        print("Sending the answer...")
         self.last_status = "Sending the answer..."
         self.driver.find_element(By.XPATH, "//*[contains(text(), 'Отправить')]").click()
 
@@ -245,6 +231,5 @@ class WebPlug:
             print("Greeting set to OFF")
 
     def go_to_assignment(self) -> None:
-        print("Going to the assignment")
         self.last_status = "Going to the assignment"
         self.driver.find_element(By.CLASS_NAME, "icon-link").click()

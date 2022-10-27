@@ -11,9 +11,6 @@ class TUI:
     def main_page(self):
         os.system("clear")
         greeting_status = "OFF" if self.web_plug.greeting == "" else "ON"
-        print(f"The question is:")
-        print("-------------------")
-        print(self.web_plug.question_text)
         print("-------------------")
         print(f"Waiting for your action... [Greeting: {greeting_status}] [d/u/i]")
         print(f"Proposed answer: to {self.web_plug.student_name}")
@@ -35,7 +32,7 @@ class TUI:
                 print("\a")
                 return
 
-    def parse_input(self):
+    def run(self):
         while True:
             self.main_page()
             input = getch()
