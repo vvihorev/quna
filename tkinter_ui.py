@@ -14,9 +14,11 @@ class TkinterUI:
         self.text = Text(self.window, height=15, width=52)
         self.last_status_label = Label(self.window, text="Logging into the MSHP page", font=('Helvetica 10 italic'))
 
-        self.b1 = Button(self.window, text="Add code inline", command=lambda: self.text.insert(tk.END, "``"))
-        self.b2 = Button(self.window, text="Add code block", command=lambda: self.text.insert(tk.END, "\n```python\n\n```"))
         self.b3 = Button(self.window, text="Exit", command=self.window.destroy)
+
+        self.replies_box = tk.Listbox(self.window, width=60)
+        for i in range(len(self.web_plug.relevant_responses)):
+            self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
 
     def update_view(self):
         self.question_label.config(text=f"Question from {self.web_plug.student_full_name.strip()}")
@@ -25,6 +27,8 @@ class TkinterUI:
         self.answer_label.config(text=self.web_plug.relevant_responses[self.web_plug.cur_response][0])
         self.text.insert(tk.END, self.web_plug.relevant_responses[self.web_plug.cur_response][1])
         self.last_status_label.config(text=self.web_plug.last_status)
+        for i in range(len(self.web_plug.relevant_responses)):
+            self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
 
     def hook_update(self, func, *args, **kwargs):
         func(*args, **kwargs)
@@ -82,15 +86,21 @@ class TkinterUI:
         self.window.bind('<Control-Cyrillic_YERU>', lambda _: self.hook_update(self.web_plug.send_and_close_answer))
         self.window.bind('<Control-Cyrillic_ef>', lambda _: self.text.delete("1.0", tk.END))
 
+        self.replies_box.bind('<Double-Button>', lambda _: self.choose_reply())
+
+    def choose_reply(self):
+        reply = self.replies_box.get(self.replies_box.curselection())
+        self.text.delete("1.0", tk.END)
+        self.text.insert("1.0", reply)
+
     def _pack_ui_elements(self):
         """Location of interface elements is defined in this function"""
         self.question_label.pack()
         self.greeting_label.pack()
         self.last_status_label.pack(side=tk.BOTTOM)
+        self.replies_box.pack()
         self.answer_label.pack()
         self.text.pack()
-        self.b1.pack(side=tk.LEFT, fill=tk.X)
-        self.b2.pack(side=tk.LEFT)
         self.b3.pack(side=tk.LEFT)
 
     def run(self):

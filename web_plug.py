@@ -27,7 +27,7 @@ class WebPlug:
         self.question_text = "No question found/opened"
 
         self.faq = FAQManager("faq.json")
-        self.relevant_responses = [""]
+        self.relevant_responses = [("", "")]
         self.cur_response = 0
 
         self.last_status = "Hello!"
