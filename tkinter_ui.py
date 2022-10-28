@@ -61,6 +61,7 @@ class TkinterUI:
         self.window.bind('<Control-z>', lambda _: self.hook_update(self.web_plug.close_answer))
         self.window.bind('<Control-s>', lambda _: self.hook_update(self.web_plug.send_answer))
         self.window.bind('<Control-S>', lambda _: self.hook_update(self.web_plug.send_and_close_answer))
+        self.window.bind('<Control-a>', lambda _: self.text.delete("1.0", tk.END))
 
         self.window.bind('<Control-Cyrillic_shorti>', lambda _: self.window.destroy())
         self.window.bind('<Control-Cyrillic_el>', lambda _: self.text.insert(tk.END, "`"))
@@ -79,6 +80,7 @@ class TkinterUI:
         self.window.bind('<Control-Cyrillic_ya>', lambda _: self.hook_update(self.web_plug.close_answer))
         self.window.bind('<Control-Cyrillic_yeru>', lambda _: self.hook_update(self.web_plug.send_answer))
         self.window.bind('<Control-Cyrillic_YERU>', lambda _: self.hook_update(self.web_plug.send_and_close_answer))
+        self.window.bind('<Control-Cyrillic_ef>', lambda _: self.text.delete("1.0", tk.END))
 
     def _pack_ui_elements(self):
         """Location of interface elements is defined in this function"""
