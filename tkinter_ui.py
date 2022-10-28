@@ -62,6 +62,24 @@ class TkinterUI:
         self.window.bind('<Control-s>', lambda _: self.hook_update(self.web_plug.send_answer))
         self.window.bind('<Control-S>', lambda _: self.hook_update(self.web_plug.send_and_close_answer))
 
+        self.window.bind('<Control-Cyrillic_shorti>', lambda _: self.window.destroy())
+        self.window.bind('<Control-Cyrillic_el>', lambda _: self.text.insert(tk.END, "`"))
+        self.window.bind('<Control-Cyrillic_o>', lambda _: self.text.insert(tk.END, "\n```python\n\n```"))
+        self.window.bind('<Control-Cyrillic_ka>', lambda _: self.hook_update(self.web_plug.refresh_questions))
+        self.window.bind('<Control-Cyrillic_ve>', lambda _: self.hook_update(self.web_plug.next_question))
+        self.window.bind('<Control-Cyrillic_ghe>', lambda _: self.hook_update(self.web_plug.next_question, prev=True))
+        self.window.bind('<Control-Cyrillic_softsign>', lambda _: self.hook_update(self.web_plug.go_to_assignment))
+        self.window.bind('<Control-Cyrillic_pe>', lambda _: self.hook_update(self.web_plug.toggle_greeting))
+        self.window.bind('<Control-Cyrillic_te>', lambda _: self.hook_update(self.web_plug.next_response))
+        self.window.bind('<Control-Cyrillic_ze>', lambda _: self.hook_update(self.web_plug.next_response, prev=True))
+        # TODO: implement pick responses functionality
+        # self.window.bind('<Control-Cyrillic_>', lambda _: self.hook_update(self.web_plug.pick_response))
+        self.window.bind('<Control-Cyrillic_es>', lambda _: self.custom_answer())
+        self.window.bind('<Control-Cyrillic_sha>', lambda _: self.send_response())
+        self.window.bind('<Control-Cyrillic_ya>', lambda _: self.hook_update(self.web_plug.close_answer))
+        self.window.bind('<Control-Cyrillic_yeru>', lambda _: self.hook_update(self.web_plug.send_answer))
+        self.window.bind('<Control-Cyrillic_YERU>', lambda _: self.hook_update(self.web_plug.send_and_close_answer))
+
     def _pack_ui_elements(self):
         """Location of interface elements is defined in this function"""
         self.question_label.pack()
