@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from web_plug import WebPlug
 from tkinter_ui import TkinterUI
 from faq import FAQManager

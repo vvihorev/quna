@@ -16,7 +16,7 @@ class TkinterUI:
 
         self.b3 = Button(self.window, text="Exit", command=self.window.destroy)
 
-        self.replies_box = tk.Listbox(self.window, width=60)
+        self.replies_box = tk.Listbox(self.window, width=60, height=20)
         for i in range(len(self.web_plug.relevant_responses)):
             self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
 
@@ -27,6 +27,7 @@ class TkinterUI:
         self.answer_label.config(text=self.web_plug.relevant_responses[self.web_plug.cur_response][0])
         self.text.insert(tk.END, self.web_plug.relevant_responses[self.web_plug.cur_response][1])
         self.last_status_label.config(text=self.web_plug.last_status)
+        self.replies_box.delete(0, tk.END)
         for i in range(len(self.web_plug.relevant_responses)):
             self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
 
@@ -46,11 +47,17 @@ class TkinterUI:
         response = self.web_plug.greeting + answer
         self.web_plug.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(response)
 
+    def insert_codeblock(self):
+        self.text.insert(tk.END, "\n```python\n\n```")
+        cursor_position = self.text.index(tk.INSERT)
+        x, y = cursor_position.split('.')
+        self.text.mark_set("insert", f"{int(x)-1}.{0}")
+
     def _bind_shortcuts(self):
         """Shortcuts are bound in this function"""
         self.window.bind('<Control-q>', lambda _: self.window.destroy())
         self.window.bind('<Control-k>', lambda _: self.text.insert(tk.END, "`"))
-        self.window.bind('<Control-j>', lambda _: self.text.insert(tk.END, "\n```python\n\n```"))
+        self.window.bind('<Control-j>', lambda _: self.insert_codeblock())
         self.window.bind('<Control-r>', lambda _: self.hook_update(self.web_plug.refresh_questions))
         self.window.bind('<Control-d>', lambda _: self.hook_update(self.web_plug.next_question))
         self.window.bind('<Control-u>', lambda _: self.hook_update(self.web_plug.next_question, prev=True))
@@ -69,7 +76,7 @@ class TkinterUI:
 
         self.window.bind('<Control-Cyrillic_shorti>', lambda _: self.window.destroy())
         self.window.bind('<Control-Cyrillic_el>', lambda _: self.text.insert(tk.END, "`"))
-        self.window.bind('<Control-Cyrillic_o>', lambda _: self.text.insert(tk.END, "\n```python\n\n```"))
+        self.window.bind('<Control-Cyrillic_o>', lambda _: self.insert_codeblock())
         self.window.bind('<Control-Cyrillic_ka>', lambda _: self.hook_update(self.web_plug.refresh_questions))
         self.window.bind('<Control-Cyrillic_ve>', lambda _: self.hook_update(self.web_plug.next_question))
         self.window.bind('<Control-Cyrillic_ghe>', lambda _: self.hook_update(self.web_plug.next_question, prev=True))
