@@ -31,9 +31,16 @@ class TkinterUI:
         for i in range(len(self.web_plug.relevant_responses)):
             self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
 
+    def update_greeting(self):
+        self.greeting_label.config(text=f"greeting is: " + ("ON" if self.web_plug.greeting != "" else "OFF"))
+
     def hook_update(self, func, *args, **kwargs):
         func(*args, **kwargs)
         self.update_view()
+
+    def hook_greeting_update(self, func, *args, **kwargs):
+        func(*args, **kwargs)
+        self.update_greeting()
 
     def custom_answer(self):
         answer = self.text.get("1.0", tk.END)
@@ -61,8 +68,8 @@ class TkinterUI:
         self.window.bind('<Control-r>', lambda _: self.hook_update(self.web_plug.refresh_questions))
         self.window.bind('<Control-d>', lambda _: self.hook_update(self.web_plug.next_question))
         self.window.bind('<Control-u>', lambda _: self.hook_update(self.web_plug.next_question, prev=True))
-        self.window.bind('<Control-m>', lambda _: self.hook_update(self.web_plug.go_to_assignment))
-        self.window.bind('<Control-g>', lambda _: self.hook_update(self.web_plug.toggle_greeting))
+        self.window.bind('<Control-m>', lambda _: self.web_plug.go_to_assignment())
+        self.window.bind('<Control-g>', lambda _: self.hook_greeting_update(self.web_plug.toggle_greeting))
         self.window.bind('<Control-n>', lambda _: self.hook_update(self.web_plug.next_response))
         self.window.bind('<Control-p>', lambda _: self.hook_update(self.web_plug.next_response, prev=True))
         # TODO: implement pick responses functionality
@@ -80,8 +87,8 @@ class TkinterUI:
         self.window.bind('<Control-Cyrillic_ka>', lambda _: self.hook_update(self.web_plug.refresh_questions))
         self.window.bind('<Control-Cyrillic_ve>', lambda _: self.hook_update(self.web_plug.next_question))
         self.window.bind('<Control-Cyrillic_ghe>', lambda _: self.hook_update(self.web_plug.next_question, prev=True))
-        self.window.bind('<Control-Cyrillic_softsign>', lambda _: self.hook_update(self.web_plug.go_to_assignment))
-        self.window.bind('<Control-Cyrillic_pe>', lambda _: self.hook_update(self.web_plug.toggle_greeting))
+        self.window.bind('<Control-Cyrillic_softsign>', lambda _: self.web_plug.go_to_assignment())
+        self.window.bind('<Control-Cyrillic_pe>', lambda _: self.hook_greeting_update(self.web_plug.toggle_greeting))
         self.window.bind('<Control-Cyrillic_te>', lambda _: self.hook_update(self.web_plug.next_response))
         self.window.bind('<Control-Cyrillic_ze>', lambda _: self.hook_update(self.web_plug.next_response, prev=True))
         # TODO: implement pick responses functionality

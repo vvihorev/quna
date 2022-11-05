@@ -3,3 +3,4 @@
 __pycache__
 faq.json
 faq.json.bak
+.DS_store
