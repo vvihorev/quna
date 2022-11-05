@@ -81,11 +81,11 @@ class WebPlug:
         # self.wait_for_element(By.XPATH, "//*[contains(text(), 'Вопросы')]")
         # self.driver.find_element(By.XPATH, "//*[contains(text(), 'Вопросы')]").click()
         # try:
-            # self.wait_for_element(By.CLASS_NAME, "discus-row")
-            # self.driver.find_element(By.CLASS_NAME, "discus-row").click()
+        # self.wait_for_element(By.CLASS_NAME, "discus-row")
+        # self.driver.find_element(By.CLASS_NAME, "discus-row").click()
         # except:
-            # self.last_status = "No questions found, refresh later"
-            # return
+        # self.last_status = "No questions found, refresh later"
+        # return
         # self.refresh_questions()
 
     def refresh_questions(self) -> None:
