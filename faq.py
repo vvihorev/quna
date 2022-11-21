@@ -1,3 +1,4 @@
+from typing import List
 import json
 import re
 
@@ -30,8 +31,13 @@ class FAQManager:
         with open(self.faq_file, "w") as file:
             json.dump(self.faq, file, ensure_ascii=False)
 
-    def get_responses(self, question):
+    def get_responses(self, question: str):
         """Returns a list of possible responses in order of decreasing likeliness of match."""
+        q_topic = self._get_question_topic(question)
+        # relevant = [self._get_question_topic(x) for x in self.faq.values() if self._get_question_topic(x) == q_topic]
+        # general = [x for x in self.faq.keys() if x[:7] == 'general']
+        # replies = relevant + general
+
         question_tokens = self._get_question_tokens(question)
         matches = []
         for pair in self.faq.items():
@@ -59,5 +65,18 @@ class FAQManager:
         """Gets a set of tokens from an input string"""
         question = question.lower()
         question = re.sub(r"[^ \w]|\d  ", " ", question)
-        tokens = [word for word in question.split() if len(word) > 4]
+        tokens = question.split()
         return set([re.sub(r"[аеиоуюяэьый]", "", token) for token in tokens])
+
+    def _get_question_topic(self, question: str):
+        if type(question) == list:
+            question= ' '.join(question)
+        topic = ""
+        first = question.find('"')
+        if first > -1:
+            second = question.find('"', first + 1)
+            if second > -1:
+                topic = question[first + 1: second]
+        return topic
+
+
