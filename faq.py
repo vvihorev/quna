@@ -33,15 +33,16 @@ class FAQManager:
 
     def get_responses(self, question: str):
         """Returns a list of possible responses in order of decreasing likeliness of match."""
-        q_topic = self._get_question_topic(question)
-        # relevant = [self._get_question_topic(x) for x in self.faq.values() if self._get_question_topic(x) == q_topic]
-        # general = [x for x in self.faq.keys() if x[:7] == 'general']
-        # replies = relevant + general
-
         question_tokens = self._get_question_tokens(question)
+        q_topic = self._get_question_topic(question)
         matches = []
         for pair in self.faq.items():
             # TODO: reply tokens can be cached, not calculated each time
+            reply_topic = self._get_question_topic(pair[1])
+            if reply_topic != q_topic and pair[0][:7] != "general":
+                continue
+            if pair[0][:7] == 'general':
+                pair[0] = pair[0][7:]
             reply_tokens = self._get_question_tokens(" ".join(pair[1]))
             match = self._token_match(question_tokens, reply_tokens)
             matches.append((match, pair[0]))
@@ -70,13 +71,11 @@ class FAQManager:
 
     def _get_question_topic(self, question: str):
         if type(question) == list:
-            question= ' '.join(question)
+            question = " ".join(question)
         topic = ""
         first = question.find('"')
         if first > -1:
             second = question.find('"', first + 1)
             if second > -1:
-                topic = question[first + 1: second]
+                topic = question[first + 1 : second]
         return topic
-
-
