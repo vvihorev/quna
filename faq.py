@@ -22,60 +22,24 @@ class FAQManager:
         with open(self.faq_file, "r") as file:
             self.faq = json.load(file)
 
-    def update_faq(self, new_faq: dict):
+    def update_faq(self, new_reply: str, question: str):
         """
         Updates the existing faq with new_faq data.
-        new_faq format: [question string: keywords list]
         """
-        self.faq.update(new_faq)
+        q_topic = self._get_question_topic(question)
+        if q_topic not in self.faq:
+            self.faq[q_topic] = [new_reply]
+        else:
+            self.faq[q_topic].append(new_reply)
         with open(self.faq_file, "w") as file:
             json.dump(self.faq, file, ensure_ascii=False)
 
     def get_responses(self, question: str):
         """Returns a list of possible responses in order of decreasing likeliness of match."""
-        question_tokens = self._get_question_tokens(question)
-        q_topic = self._get_question_topic(question)
-        matches = []
-        for pair in self.faq.items():
-            # TODO: reply tokens can be cached, not calculated each time
-            reply_topic = self._get_question_topic(pair[1])
-            if reply_topic != q_topic and pair[0][:7] != "general":
-                continue
-            if pair[0][:7] == 'general':
-                pair[0] = pair[0][7:]
-            reply_tokens = self._get_question_tokens(" ".join(pair[1]))
-            match = self._token_match(question_tokens, reply_tokens)
-            matches.append((match, pair[0]))
-        matches.sort(key=(lambda x: x[0]))
-        return matches[::-1]
+        matches = self.faq.get(question, [])
+        for m in self.faq["general"]:
+            if m[:7] == 'general':
+                m = m[:7]
+            matches.append(m)
+        return matches
 
-    def _word_match(self, w1: str, w2: str):
-        """Returns probability of two words being the same."""
-        return round(
-            len([p for p in zip(w1, w2) if p[0] == p[1]]) / min(len(w1), len(w2)), 2
-        )
-
-    def _token_match(self, question_tokens: set, reply_tokens: set):
-        """
-        Returns a probability of two sets of tokens matching.
-        Depends on the size of the second set.
-        """
-        return round(len(question_tokens & reply_tokens) / len(reply_tokens), 2)
-
-    def _get_question_tokens(self, question: str) -> set:
-        """Gets a set of tokens from an input string"""
-        question = question.lower()
-        question = re.sub(r"[^ \w]|\d  ", " ", question)
-        tokens = question.split()
-        return set([re.sub(r"[аеиоуюяэьый]", "", token) for token in tokens])
-
-    def _get_question_topic(self, question: str):
-        if type(question) == list:
-            question = " ".join(question)
-        topic = ""
-        first = question.find('"')
-        if first > -1:
-            second = question.find('"', first + 1)
-            if second > -1:
-                topic = question[first + 1 : second]
-        return topic

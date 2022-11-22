@@ -27,7 +27,7 @@ class WebPlug:
         self.question_text = "No question found/opened"
 
         self.faq = FAQManager("faq.json")
-        self.relevant_responses = [("", "")]
+        self.relevant_responses = [""]
         self.cur_response = 0
 
         self.last_status = "Hello!"
@@ -56,7 +56,7 @@ class WebPlug:
                 )
             except:
                 self.last_status = "Имя студента не нашлось :("
-            self.question_text = self.get_messages_text()
+            self.question_text = self.get_question_header()
         pyperclip.copy(self.student_full_name)
         self.greeting = f"Добрый день, {self.student_name} :)\n"
         self.relevant_responses = self.faq.get_responses(self.question_text)
@@ -138,71 +138,13 @@ class WebPlug:
         else:
             self.last_status = "No more responses found"
 
-    def pick_response(self):
-        os.system("clear")
-        print("Pick one of the available responses: ('' to cancel)")
-        for i, r in enumerate(self.relevant_responses):
-            print(f"{i}: {r[0]}, {r[1]}")
-        x = input("Response number: ")
-        if x == "":
-            return
-        else:
-            x = int(x)
-        if 0 <= x < len(self.relevant_responses):
-            self.cur_response = int(x)
-
-    def get_messages_text(self) -> str:
+    def get_question_header(self) -> str:
         """Get text of the last message in the current question."""
         self.wait_for_element(
             By.XPATH, "//div[contains(@class, 'comment_message__text')]"
         )
-        messages = self.driver.find_elements(
-            By.XPATH, "//div[contains(@class, 'comment_message__text')]"
-        )
         question_header = self.driver.find_element(By.CLASS_NAME, "h4").text
-        messages_text = "Message was not found"
-        if len(messages) > 0:
-            messages_text = (
-                question_header + "\n" + "\n".join([m.text for m in messages])
-            )
-        return messages_text
-
-    def input_answer(self) -> None:
-        """Inputs the given answer into the textarea."""
-        os.system("clear")
-        print("The question is:")
-        print(self.question_text)
-        print("-------------------")
-        print("Input your answer: (input '' to exit)")
-        print(self.greeting)
-        input_answer = input()
-        if input_answer == "":
-            os.system("clear")
-            print("Quitting from edit mode")
-            self.last_status = "Quitting from edit mode"
-            return
-        answer = (
-            self.greeting + self.relevant_responses[self.cur_response][1] + input_answer
-        )
-        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(answer)
-
-    def custom_answer(self) -> None:
-        """Adds a new answer to the FAQ"""
-        print("Adding custom answer to the FAQ")
-        print("Write down your answer: ('' to exit)")
-        answer = input()
-        if answer == "":
-            return
-        print("Write down some keywords: ('' to exit)")
-        input_keywords = input()
-        if input_keywords != "":
-            keywords = input_keywords.split()
-            keywords += self.question_text.split()
-            self.faq.update_faq({answer: keywords})
-        response = self.greeting + answer
-        self.driver.find_element(By.CLASS_NAME, "auto-textarea-input").send_keys(
-            response
-        )
+        return question_header
 
     def send_and_close_answer(self) -> None:
         """Find and press the 'send and close answer' button."""

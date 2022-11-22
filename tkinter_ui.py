@@ -14,9 +14,6 @@ class TkinterUI:
         self.greeting_label = Label(
             self.window, text="greeting is:", font=("Helvetica 14")
         )
-        self.answer_label = Label(
-            self.window, text="Proposed answer", font=("Helvetica 16 bold")
-        )
         self.text = Text(self.window, height=15, width=52)
         self.last_status_label = Label(
             self.window, text="Logging into the MSHP page", font=("Helvetica 10 italic")
@@ -26,7 +23,7 @@ class TkinterUI:
 
         self.replies_box = tk.Listbox(self.window, width=60, height=20)
         for i in range(len(self.web_plug.relevant_responses)):
-            self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
+            self.replies_box.insert(i, self.web_plug.relevant_responses[i])
 
     def update_view(self):
         self.question_label.config(
@@ -36,16 +33,13 @@ class TkinterUI:
             text=f"greeting is: " + ("ON" if self.web_plug.greeting != "" else "OFF")
         )
         self.text.delete("1.0", tk.END)
-        self.answer_label.config(
-            text=self.web_plug.relevant_responses[self.web_plug.cur_response][0]
-        )
         self.text.insert(
-            tk.END, self.web_plug.relevant_responses[self.web_plug.cur_response][1]
+            tk.END, self.web_plug.relevant_responses[self.web_plug.cur_response]
         )
         self.last_status_label.config(text=self.web_plug.last_status)
         self.replies_box.delete(0, tk.END)
         for i in range(len(self.web_plug.relevant_responses)):
-            self.replies_box.insert(i, self.web_plug.relevant_responses[i][1])
+            self.replies_box.insert(i, self.web_plug.relevant_responses[i])
 
     def update_greeting(self):
         self.greeting_label.config(
@@ -58,8 +52,7 @@ class TkinterUI:
 
     def custom_answer(self):
         answer = self.text.get("1.0", tk.END)
-        keywords = self.web_plug.question_text.split()
-        self.web_plug.faq.update_faq({answer: list(set(keywords))})
+        self.web_plug.faq.update_faq(answer, self.web_plug.question_text)
         response = self.web_plug.greeting + answer
         self.web_plug.driver.find_element(
             By.CLASS_NAME, "auto-textarea-input"
@@ -185,7 +178,6 @@ class TkinterUI:
         self.greeting_label.pack()
         self.last_status_label.pack(side=tk.BOTTOM)
         self.replies_box.pack()
-        self.answer_label.pack()
         self.text.pack()
         self.b3.pack(side=tk.LEFT)
 
