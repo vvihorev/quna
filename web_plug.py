@@ -1,6 +1,5 @@
 import os
 import re
-import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -64,7 +63,6 @@ class WebPlug:
 
     def log_in_mshp(self) -> None:
         """Log in to the mshp.ru website and open the questions tab."""
-        print("Logging into the mshp page")
         self.last_status = "Logging into the mshp page"
         try:
             self.driver.get("https://my.mshp.ru/accounts/login/#/")
